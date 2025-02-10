@@ -168,7 +168,7 @@ class UserInfo {
                 $.log(`备份: ${backMsg}`);
             }
         } catch (e) {
-            $.log(`❌一键领取签到/备份奖励失败！原因为:${e}`)
+            $.log(`❌领取签到奖励失败！原因为:${e}`)
         }
     }
     //获取accessToken
@@ -366,8 +366,10 @@ class UserInfo {
                 },
                 body: JSON.stringify({ signInDay: signInCount }),
             };
-            //post方法
+            // 发起请求并获取结果
             let { result } = await this.Request(options);
+            // 输出请求响应内容
+            console.log('请求响应内容:', result);
             // 检查 result 是否存在
             if (result) {
                 // 打印领取详情
