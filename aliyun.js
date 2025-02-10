@@ -367,7 +367,7 @@ class UserInfo {
                 body: JSON.stringify({ signInDay: signInCount }),
             };
             //post方法
-            let { result, message } = await this.Request(options);
+            let { result } = await this.Request(options);
             // 检查 result 是否存在
             if (result) {
                 // 打印领取详情
