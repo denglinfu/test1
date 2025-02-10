@@ -66,7 +66,6 @@ $.uploadFileList = [];
 //bark推送
 $.barkKey = ($.isNode() ? process.env["bark_key"] : $.getdata("bark_key")) || '';
 //---------------------- 自定义变量区域 -----------------------------------
-
 //脚本入口函数main()
 async function main() {
     await getNotice();
@@ -369,9 +368,15 @@ class UserInfo {
             };
             //post方法
             let { result, message } = await this.Request(options);
-            //打印领取详情
-            $.log(`领取第${signInCount}天签到奖励 => 🎉${result.notice || result.name}领取成功!`);
-            return result.notice ? result.notice : result.name;
+            // 检查 result 是否存在
+            if (result) {
+                // 打印领取详情
+                $.log(`领取第${signInCount}天签到奖励 => 🎉${result.notice || result.name}领取成功!`);
+                return result.notice ? result.notice : result.name;
+            } else {
+                $.log(`❌领取第${signInCount}天签到奖励失败！未返回有效结果`);
+                return null;
+            }
         } catch (e) {
             $.log(`❌领取签到奖励失败！原因为:${e}`)
         }
